@@ -1,5 +1,5 @@
 package com.talos.javatraining.lesson3.classifications;
 
-public interface BonyFish {
+public interface BonyFish extends Fish{
 
 }

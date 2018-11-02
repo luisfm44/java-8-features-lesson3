@@ -1,19 +1,9 @@
 package com.talos.javatraining.lesson3.impl.animals;
 
-import com.talos.javatraining.lesson3.AnimalSupport;
-import com.talos.javatraining.lesson3.impl.AbstractAnimal;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.talos.javatraining.lesson3.classifications.Reptile;
 
 
-public class Alligator extends AbstractAnimal
+public class Alligator implements  Reptile
 {
-	@Override
-	public List<String> getCharacteristics()
-	{
-		List<String> characteristics = new ArrayList<>(AnimalSupport.getReptileCharacteristics());
-		characteristics.add("They have U-shaped snouts");
-		return characteristics;
-	}
+	
 }

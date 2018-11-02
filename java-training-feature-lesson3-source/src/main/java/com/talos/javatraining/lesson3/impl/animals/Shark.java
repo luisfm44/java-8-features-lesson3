@@ -1,20 +1,8 @@
 package com.talos.javatraining.lesson3.impl.animals;
 
-import com.talos.javatraining.lesson3.AnimalSupport;
-import com.talos.javatraining.lesson3.impl.AbstractAnimal;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.talos.javatraining.lesson3.classifications.CartilaginousFish;
 
 
-public class Shark extends AbstractAnimal
+public class Shark implements CartilaginousFish
 {
-	@Override
-	public List<String> getCharacteristics()
-	{
-		List<String> characteristics = new ArrayList<>(AnimalSupport.getFishCharacteristics());
-		characteristics.addAll(AnimalSupport.getCartilaginousFishCharacteristics());
-		characteristics.add("Highly developed senses");
-		return characteristics;
-	}
 }
