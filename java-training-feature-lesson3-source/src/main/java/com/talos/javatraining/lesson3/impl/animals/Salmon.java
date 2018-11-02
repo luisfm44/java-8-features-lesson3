@@ -3,11 +3,8 @@ package com.talos.javatraining.lesson3.impl.animals;
 import java.util.List;
 
 import com.talos.javatraining.lesson3.classifications.BonyFish;
-import com.talos.javatraining.lesson3.impl.AbstractAnimal;
 
-
-public class Salmon extends AbstractAnimal implements BonyFish
-{
+public class Salmon implements BonyFish {
 
 	@Override
 	public List<String> getParentCharacteristics() {
@@ -18,7 +15,7 @@ public class Salmon extends AbstractAnimal implements BonyFish
 	@Override
 	public void populateCharacteristics(List<String> characteristics) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

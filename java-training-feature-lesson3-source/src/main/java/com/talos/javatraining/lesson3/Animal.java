@@ -1,6 +1,7 @@
 package com.talos.javatraining.lesson3;
 
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,6 +27,20 @@ public interface Animal {
 
 	default String getName() {
 		return getClass().getSimpleName();
+	}
+
+	static Object create(String name) throws ClassNotFoundException {
+		try {
+			if (Objects.nonNull(name)) {
+				return (Object) Class.forName(name).newInstance();
+			} else {
+				return null;
+			}
+
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			return null;
+		}
+
 	}
 
 }

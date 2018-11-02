@@ -1,5 +1,16 @@
 package com.talos.javatraining.lesson3.classifications;
 
-public interface Fish {
+import java.util.ArrayList;
+import java.util.List;
 
+public interface Fish {
+	default List<String> getCharacteristics() {
+		List<String> characteristics = new ArrayList<>(getParentCharacteristics());
+		populateCharacteristics(characteristics);
+		return characteristics;
+	}
+
+	public abstract List<String> getParentCharacteristics();
+
+	public abstract void populateCharacteristics(List<String> characteristics);
 }

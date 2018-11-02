@@ -3,10 +3,8 @@ package com.talos.javatraining.lesson3.impl.animals;
 import java.util.List;
 
 import com.talos.javatraining.lesson3.classifications.JawlessFish;
-import com.talos.javatraining.lesson3.impl.AbstractAnimal;
 
-public class Hagfish extends AbstractAnimal implements JawlessFish
-{
+public class Hagfish implements JawlessFish {
 
 	@Override
 	public List<String> getParentCharacteristics() {
@@ -17,6 +15,6 @@ public class Hagfish extends AbstractAnimal implements JawlessFish
 	@Override
 	public void populateCharacteristics(List<String> characteristics) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

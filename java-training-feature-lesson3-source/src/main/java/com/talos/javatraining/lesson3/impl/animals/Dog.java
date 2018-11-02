@@ -3,9 +3,8 @@ package com.talos.javatraining.lesson3.impl.animals;
 import java.util.List;
 
 import com.talos.javatraining.lesson3.classifications.Mammal;
-import com.talos.javatraining.lesson3.impl.AbstractAnimal;
 
-public class Dog extends AbstractAnimal implements Mammal {
+public class Dog implements Mammal {
 
 	@Override
 	public List<String> getParentCharacteristics() {

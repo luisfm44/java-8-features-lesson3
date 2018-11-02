@@ -3,11 +3,8 @@ package com.talos.javatraining.lesson3.impl.animals;
 import java.util.List;
 
 import com.talos.javatraining.lesson3.classifications.CartilaginousFish;
-import com.talos.javatraining.lesson3.impl.AbstractAnimal;
 
-
-public class Ray extends AbstractAnimal implements CartilaginousFish 
-{
+public class Ray implements CartilaginousFish {
 
 	@Override
 	public List<String> getParentCharacteristics() {
@@ -18,6 +15,6 @@ public class Ray extends AbstractAnimal implements CartilaginousFish
 	@Override
 	public void populateCharacteristics(List<String> characteristics) {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

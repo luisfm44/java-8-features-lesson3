@@ -1,7 +1,10 @@
 package com.talos.javatraining.lesson3;
 
-import com.talos.javatraining.lesson3.impl.animals.*;
-import org.junit.Test;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -9,13 +12,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import com.talos.javatraining.lesson3.classifications.Reptile;
+import com.talos.javatraining.lesson3.impl.animals.Alligator;
+import com.talos.javatraining.lesson3.impl.animals.Crocodile;
+import com.talos.javatraining.lesson3.impl.animals.Dog;
+import com.talos.javatraining.lesson3.impl.animals.Frog;
+import com.talos.javatraining.lesson3.impl.animals.Hagfish;
+import com.talos.javatraining.lesson3.impl.animals.Hen;
+import com.talos.javatraining.lesson3.impl.animals.Human;
+import com.talos.javatraining.lesson3.impl.animals.Lamprey;
+import com.talos.javatraining.lesson3.impl.animals.Octopus;
+import com.talos.javatraining.lesson3.impl.animals.Ray;
+import com.talos.javatraining.lesson3.impl.animals.Salamander;
+import com.talos.javatraining.lesson3.impl.animals.Salmon;
+import com.talos.javatraining.lesson3.impl.animals.Shark;
+import com.talos.javatraining.lesson3.impl.animals.Sparrow;
+import com.talos.javatraining.lesson3.impl.animals.Tuna;
+import com.talos.javatraining.lesson3.impl.animals.Worm;
 
 
 public class AnimalTest
 {
 	private static final String PACKAGE = AnimalTest.class.getPackage().getName() + ".";
-	private static final List<Animal> ANIMAL_INSTANCES = Arrays
+	private static final List<Object> ANIMAL_INSTANCES = Arrays
 			.asList(new Worm(), new Octopus(), new Tuna(), new Salmon(), new Shark(), new Ray(), new Hagfish(), new Lamprey(),
 					new Frog(), new Salamander(), new Crocodile(), new Alligator(), new Hen(), new Sparrow(), new Human(),
 					new Dog());
@@ -86,7 +107,7 @@ public class AnimalTest
 	@Test
 	public void exercise_4() throws Exception
 	{
-		for(Animal animal: ANIMAL_INSTANCES){
+		for(Object animal: ANIMAL_INSTANCES){
 			try
 			{
 				animal.getClass().getDeclaredMethod("getCharacteristics");
@@ -125,7 +146,7 @@ public class AnimalTest
 			}
 		}
 		Map<String, String[]> expectations = createExpectations();
-		ANIMAL_INSTANCES.forEach(a -> checkCharacteristics(a, expectations.get(a.getName())));
+		ANIMAL_INSTANCES.forEach(a -> checkCharacteristics(a, expectations.get(((Method) a).getName())));
 	}
 
 	@Test
@@ -162,15 +183,15 @@ public class AnimalTest
 		System.out.println(animal.getFullDescription());
 	}
 
-	private void checkCharacteristics(Animal animal, String[] expected)
+	private void checkCharacteristics(Object a, String[] expected)
 	{
-		assertNotNull(animal.getName() + " doesn't have the expected values", expected);
-		List<String> characteristics = animal.getCharacteristics();
+		assertNotNull(((Method) a).getName() + " doesn't have the expected values", expected);
+		List<String> characteristics = ((Reptile) a).getCharacteristics();
 		Arrays.sort(expected);
 		characteristics.sort(String::compareTo);
 		String[] actual = characteristics.toArray(new String[characteristics.size()]);
 
-		assertArrayEquals("The expected characteristics are different for " + animal.getName(), expected, actual);
+		assertArrayEquals("The expected characteristics are different for " + ((Method) a).getName(), expected, actual);
 	}
 
 	private Map<String, String[]> createExpectations()
