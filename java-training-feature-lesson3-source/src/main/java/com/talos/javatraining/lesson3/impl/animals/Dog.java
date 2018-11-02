@@ -1,6 +1,21 @@
 package com.talos.javatraining.lesson3.impl.animals;
 
-import com.talos.javatraining.lesson3.classifications.Mammal;
+import java.util.List;
 
-public class Dog implements Mammal {
+import com.talos.javatraining.lesson3.classifications.Mammal;
+import com.talos.javatraining.lesson3.impl.AbstractAnimal;
+
+public class Dog extends AbstractAnimal implements Mammal {
+
+	@Override
+	public List<String> getParentCharacteristics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void populateCharacteristics(List<String> characteristics) {
+		// TODO Auto-generated method stub
+		
+	}
 }

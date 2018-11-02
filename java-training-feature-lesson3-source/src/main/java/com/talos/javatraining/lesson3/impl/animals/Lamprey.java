@@ -1,6 +1,21 @@
 package com.talos.javatraining.lesson3.impl.animals;
 
-import com.talos.javatraining.lesson3.classifications.JawlessFish;
+import java.util.List;
 
-public class Lamprey implements JawlessFish {
+import com.talos.javatraining.lesson3.classifications.JawlessFish;
+import com.talos.javatraining.lesson3.impl.AbstractAnimal;
+
+public class Lamprey extends AbstractAnimal implements JawlessFish {
+
+	@Override
+	public List<String> getParentCharacteristics() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void populateCharacteristics(List<String> characteristics) {
+		// TODO Auto-generated method stub
+		
+	}
 }
