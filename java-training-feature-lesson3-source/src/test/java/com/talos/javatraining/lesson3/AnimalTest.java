@@ -1,10 +1,7 @@
 package com.talos.javatraining.lesson3;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import com.talos.javatraining.lesson3.impl.animals.*;
+import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -12,55 +9,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import static org.junit.Assert.*;
 
-import com.talos.javatraining.lesson3.classifications.Reptile;
-import com.talos.javatraining.lesson3.impl.animals.Alligator;
-import com.talos.javatraining.lesson3.impl.animals.Crocodile;
-import com.talos.javatraining.lesson3.impl.animals.Dog;
-import com.talos.javatraining.lesson3.impl.animals.Frog;
-import com.talos.javatraining.lesson3.impl.animals.Hagfish;
-import com.talos.javatraining.lesson3.impl.animals.Hen;
-import com.talos.javatraining.lesson3.impl.animals.Human;
-import com.talos.javatraining.lesson3.impl.animals.Lamprey;
-import com.talos.javatraining.lesson3.impl.animals.Octopus;
-import com.talos.javatraining.lesson3.impl.animals.Ray;
-import com.talos.javatraining.lesson3.impl.animals.Salamander;
-import com.talos.javatraining.lesson3.impl.animals.Salmon;
-import com.talos.javatraining.lesson3.impl.animals.Shark;
-import com.talos.javatraining.lesson3.impl.animals.Sparrow;
-import com.talos.javatraining.lesson3.impl.animals.Tuna;
-import com.talos.javatraining.lesson3.impl.animals.Worm;
-
-
-public class AnimalTest
-{
+public class AnimalTest {
 	private static final String PACKAGE = AnimalTest.class.getPackage().getName() + ".";
-	private static final List<Object> ANIMAL_INSTANCES = Arrays
-			.asList(new Worm(), new Octopus(), new Tuna(), new Salmon(), new Shark(), new Ray(), new Hagfish(), new Lamprey(),
-					new Frog(), new Salamander(), new Crocodile(), new Alligator(), new Hen(), new Sparrow(), new Human(),
-					new Dog());
-
+	private static final List<Animal> ANIMAL_INSTANCES = Arrays.asList(new Worm(), new Octopus(), new Tuna(),
+			new Salmon(), new Shark(), new Ray(), new Hagfish(), new Lamprey(), new Frog(), new Salamander(),
+			new Crocodile(), new Alligator(), new Hen(), new Sparrow(), new Human(), new Dog());
 
 	@Test
-	public void exercise_1() throws Exception
-	{
+	public void exercise_1() throws Exception {
 		Method method = Animal.class.getMethod("getFullDescription");
 
 		assertTrue("Method getFullDescription should be a default method", method.isDefault());
 	}
 
 	@Test
-	public void exercise_2() throws Exception
-	{
+	public void exercise_2() throws Exception {
 		Method method = Animal.class.getMethod("getName");
 
 		assertTrue("Method getName should be a default method", method.isDefault());
 	}
 
 	@Test
-	public void exercise_3() throws Exception
-	{
+	public void exercise_3() throws Exception {
 		Class<?> invertebrate = getClass().getClassLoader().loadClass(PACKAGE + "Invertebrate");
 		assertTrue(Animal.class.isAssignableFrom(invertebrate));
 		assertTrue(invertebrate.isAssignableFrom(Worm.class));
@@ -105,23 +77,18 @@ public class AnimalTest
 	}
 
 	@Test
-	public void exercise_4() throws Exception
-	{
-		for(Object animal: ANIMAL_INSTANCES){
-			try
-			{
+	public void exercise_4() throws Exception {
+		for (Object animal : ANIMAL_INSTANCES) {
+			try {
 				animal.getClass().getDeclaredMethod("getCharacteristics");
-				fail("The class " +  animal.getClass() + " has the getCharacteristics method declared. Remove it");
-			}
-			catch (NoSuchMethodException ex)
-			{
+				fail("The class " + animal.getClass() + " has the getCharacteristics method declared. Remove it");
+			} catch (NoSuchMethodException ex) {
 			}
 		}
 	}
 
 	@Test
-	public void exercise_5() throws Exception
-	{
+	public void exercise_5() throws Exception {
 		verifyDoesntExists(PACKAGE + "AnimalSupport", "The AnimalSupport should be removed");
 
 		Class<?> fish = getClass().getClassLoader().loadClass(PACKAGE + "Fish");
@@ -132,26 +99,23 @@ public class AnimalTest
 		Class<?> reptile = getClass().getClassLoader().loadClass(PACKAGE + "Reptile");
 		Class<?> bird = getClass().getClassLoader().loadClass(PACKAGE + "Bird");
 		Class<?> mammal = getClass().getClassLoader().loadClass(PACKAGE + "Mammal");
-		List<Class<?>> classes = Arrays.asList(fish, bonyFish, cartilaginousFish, jawlessFish, amphibian, reptile, bird, mammal);
-		for (Class<?> clazz : classes)
-		{
-			try
-			{
+		List<Class<?>> classes = Arrays.asList(fish, bonyFish, cartilaginousFish, jawlessFish, amphibian, reptile, bird,
+				mammal);
+		for (Class<?> clazz : classes) {
+			try {
 				Method method = clazz.getMethod("getCharacteristics");
-				assertTrue("The default method getCharacteristics on " + clazz.getName() + " is missing", method.isDefault());
-			}
-			catch (NoSuchMethodException ex)
-			{
+				assertTrue("The default method getCharacteristics on " + clazz.getName() + " is missing",
+						method.isDefault());
+			} catch (NoSuchMethodException ex) {
 				assertTrue(clazz.getName() + " : " + ex.getMessage(), false);
 			}
 		}
 		Map<String, String[]> expectations = createExpectations();
-		ANIMAL_INSTANCES.forEach(a -> checkCharacteristics(a, expectations.get(((Method) a).getName())));
+		ANIMAL_INSTANCES.forEach(a -> checkCharacteristics(a, expectations.get(a.getName())));
 	}
 
 	@Test
-	public void exercise_6() throws Exception
-	{
+	public void exercise_6() throws Exception {
 		Method method = Animal.class.getMethod("create", String.class);
 		checkMethod(method, "Worm");
 		checkMethod(method, "Octopus");
@@ -174,31 +138,28 @@ public class AnimalTest
 		assertNull("Expected null", method.invoke(null, "Dummy"));
 	}
 
-	private void checkMethod(Method method, String name) throws Exception
-	{
+	private void checkMethod(Method method, String name) throws Exception {
 		Object obj = method.invoke(null, name);
-		assertNotNull("Returned null with name: " +  name, obj);
+		assertNotNull("Returned null with name: " + name, obj);
 		assertTrue(obj instanceof Animal);
 		Animal animal = (Animal) obj;
 		System.out.println(animal.getFullDescription());
 	}
 
-	private void checkCharacteristics(Object a, String[] expected)
-	{
-		assertNotNull(((Method) a).getName() + " doesn't have the expected values", expected);
-		List<String> characteristics = ((Reptile) a).getCharacteristics();
+	private void checkCharacteristics(Animal animal, String[] expected) {
+		assertNotNull(animal.getName() + " doesn't have the expected values", expected);
+		List<String> characteristics = animal.getCharacteristics();
 		Arrays.sort(expected);
 		characteristics.sort(String::compareTo);
 		String[] actual = characteristics.toArray(new String[characteristics.size()]);
 
-		assertArrayEquals("The expected characteristics are different for " + ((Method) a).getName(), expected, actual);
+		assertArrayEquals("The expected characteristics are different for " + animal.getName(), expected, actual);
 	}
 
-	private Map<String, String[]> createExpectations()
-	{
+	private Map<String, String[]> createExpectations() {
 		Map<String, String[]> expectations = new HashMap<>();
-		expectations.put("Worm",
-				new String[] { "Lack of backbones and internal skeletons", "Simple anatomy", "They are bilaterally symmetrical" });
+		expectations.put("Worm", new String[] { "Lack of backbones and internal skeletons", "Simple anatomy",
+				"They are bilaterally symmetrical" });
 		expectations.put("Octopus",
 				new String[] { "Lack of backbones and internal skeletons", "Simple anatomy", "They have eight legs" });
 		expectations.put("Tuna",
@@ -231,21 +192,20 @@ public class AnimalTest
 		expectations.put("Alligator", new String[] { "They ruled the earth for over 150 million years",
 				"They can lay some distance away from bodies of water", "They have U-shaped snouts" });
 		expectations.put("Hen", new String[] { "Coat of feathers", "Warm-blooded metabolisms", "They don't fly" });
-		expectations.put("Sparrow", new String[] { "Coat of feathers", "Warm-blooded metabolisms", "They fly", "They sing" });
-		expectations.put("Human",
-				new String[] { "They have hair or fur", "They suckle milk when they are young", "They rule the word!" });
-		expectations.put("Dog", new String[] { "They have hair or fur", "They suckle milk when they are young", "They bark" });
+		expectations.put("Sparrow",
+				new String[] { "Coat of feathers", "Warm-blooded metabolisms", "They fly", "They sing" });
+		expectations.put("Human", new String[] { "They have hair or fur", "They suckle milk when they are young",
+				"They rule the word!" });
+		expectations.put("Dog",
+				new String[] { "They have hair or fur", "They suckle milk when they are young", "They bark" });
 		return expectations;
 	}
 
-	void verifyDoesntExists(String clazz, String failureMessage){
-		try
-		{
+	void verifyDoesntExists(String clazz, String failureMessage) {
+		try {
 			getClass().getClassLoader().loadClass(clazz);
 			fail(failureMessage);
-		}
-		catch (NoClassDefFoundError | ClassNotFoundException err)
-		{
+		} catch (NoClassDefFoundError | ClassNotFoundException err) {
 			// nothing to do. Expected scenario
 		}
 	}

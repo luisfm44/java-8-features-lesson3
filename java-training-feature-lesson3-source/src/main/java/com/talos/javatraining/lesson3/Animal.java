@@ -29,10 +29,10 @@ public interface Animal {
 		return getClass().getSimpleName();
 	}
 
-	static Object create(String name) throws ClassNotFoundException {
+	static Animal create(String name) throws ClassNotFoundException {
 		try {
 			if (Objects.nonNull(name)) {
-				return (Object) Class.forName(name).newInstance();
+				return (Animal) Class.forName(name).newInstance();
 			} else {
 				return null;
 			}

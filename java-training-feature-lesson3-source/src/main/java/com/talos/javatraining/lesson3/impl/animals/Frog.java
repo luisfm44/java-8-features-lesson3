@@ -2,19 +2,18 @@ package com.talos.javatraining.lesson3.impl.animals;
 
 import java.util.List;
 
-import com.talos.javatraining.lesson3.classifications.Amphibian;
+import com.talos.javatraining.lesson3.impl.AbstractAnimal;
 
-public class Frog implements Amphibian {
+public class Frog extends AbstractAnimal  {
 
 	@Override
-	public List<String> getParentCharacteristics() {
+	public List<String> getCharacteristics() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public void populateCharacteristics(List<String> characteristics) {
-		// TODO Auto-generated method stub
 
-	}
+	
+
+	
 }
