@@ -14,8 +14,7 @@ public interface Amphibian extends Animal{
 	public static List<String> getAmphibianCharacteristics()
 	{
 		return Arrays.asList("They have a semi-aquatic lifestyle",
-				"They have to stay near bodies of water, both to maintain the moisture of their skin and to lay their eggs");
+				"They have to stay near bodies of water, both to maintain the moisture of their skin and to lay their eggs","Other Characteristics");
 	}
-
 	public abstract void populateCharacteristics(List<String> characteristics);
 }
